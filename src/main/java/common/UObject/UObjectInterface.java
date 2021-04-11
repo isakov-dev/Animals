@@ -1,9 +1,11 @@
 package common.UObject;
 
+import java.util.ArrayList;
+
 public interface UObjectInterface {
 
-    public void set(String key, String value);
+    public void add(ArrayList<String> subList);
 
-    public String get(String key) throws UObjectException;
+    public ArrayList<String> get(int index) throws UObjectException;
 
 }

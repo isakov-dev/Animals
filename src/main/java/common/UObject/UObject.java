@@ -1,21 +1,21 @@
 package common.UObject;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class UObject implements UObjectInterface {
 
-    private HashMap<String, String> map = new HashMap<>();
+    private ArrayList<ArrayList<String>> list = new ArrayList<>();
 
-    public void set(String key, String value) {
-        map.put(key, value);
+    public void add(ArrayList<String> subList) {
+        list.add(subList);
     }
 
-    public String get(String key) throws UObjectException {
+    public ArrayList<String> get(int index) throws UObjectException {
 
-        if (map.containsKey(key))
-            return map.get(key);
+        if (list.size() < index)
+            return list.get(index);
         else
-            throw new UObjectException("No such key: " + key);
+            throw new UObjectException("Index is out of range");
 
     }
 

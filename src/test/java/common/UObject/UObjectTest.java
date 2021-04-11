@@ -3,22 +3,27 @@ package common.UObject;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class UObjectTest {
 
     @Test
     public void addTest() {
 
         UObject testObj = new UObject();
-        testObj.set("field", "value");
-        String actual = null;
+        ArrayList<String> testSubList = new ArrayList<>();
+        testSubList.add("test1");
+        testSubList.add("test2");
+        testObj.add(testSubList);
+        ArrayList<String> actual = null;
 
         try {
-            actual = testObj.get("field");
+            actual = testObj.get(0);
         } catch (UObjectException e) {
             e.printStackTrace();
         }
 
-        Assert.assertEquals("value", actual);
+        Assert.assertEquals(testSubList, actual);
 
     }
 
@@ -26,7 +31,7 @@ public class UObjectTest {
     public void getNonExistingTest() throws UObjectException {
 
         UObject testObj = new UObject();
-        testObj.get("field");
+        testObj.get(0);
 
     }
 
