@@ -19,4 +19,8 @@ public class UObject implements UObjectInterface {
 
     }
 
+    public ArrayList<ArrayList<String>> getAll() {
+        return list;
+    }
+
 }

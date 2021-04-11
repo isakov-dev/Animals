@@ -8,4 +8,6 @@ public interface UObjectInterface {
 
     public ArrayList<String> get(int index) throws UObjectException;
 
+    public ArrayList<ArrayList<String>> getAll();
+
 }
