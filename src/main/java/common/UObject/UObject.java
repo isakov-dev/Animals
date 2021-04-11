@@ -12,7 +12,7 @@ public class UObject implements UObjectInterface {
 
     public ArrayList<String> get(int index) throws UObjectException {
 
-        if (list.size() < index)
+        if (list.size() > index)
             return list.get(index);
         else
             throw new UObjectException("Index is out of range");

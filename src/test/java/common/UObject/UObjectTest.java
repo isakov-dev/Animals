@@ -27,7 +27,7 @@ public class UObjectTest {
 
     }
 
-    @Test(expected=UObjectException.class)
+    @Test(expected = UObjectException.class)
     public void getNonExistingTest() throws UObjectException {
 
         UObject testObj = new UObject();
