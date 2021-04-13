@@ -1,7 +1,7 @@
-package common.FileService;
+package common.fileservice;
 
-import common.UObject.UObject;
-import common.UObject.UObjectException;
+import common.uobject.UObject;
+import common.uobject.UObjectException;
 import org.junit.Assert;
 import org.junit.Test;
 

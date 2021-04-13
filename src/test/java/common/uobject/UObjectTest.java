@@ -1,4 +1,4 @@
-package common.UObject;
+package common.uobject;
 
 import org.junit.Assert;
 import org.junit.Test;

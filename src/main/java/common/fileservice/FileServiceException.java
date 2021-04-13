@@ -1,4 +1,4 @@
-package common.FileService;
+package common.fileservice;
 
 public class FileServiceException extends Exception {
 

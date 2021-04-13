@@ -1,6 +1,6 @@
-package common.FileService;
+package common.fileservice;
 
-import common.UObject.UObject;
+import common.uobject.UObject;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

@@ -1,4 +1,4 @@
-package common.UObject;
+package common.uobject;
 
 public class UObjectException  extends Exception {
 

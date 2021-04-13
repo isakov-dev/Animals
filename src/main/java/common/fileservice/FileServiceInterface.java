@@ -1,6 +1,6 @@
-package common.FileService;
+package common.fileservice;
 
-import common.UObject.UObject;
+import common.uobject.UObject;
 
 public interface FileServiceInterface {
 
