@@ -8,8 +8,13 @@ import java.util.Iterator;
 
 public class RulesGroup implements RulesGroupInterface {
 
+    private ArrayList<String> properties;
     private ArrayList<RuleInterface> rules = new ArrayList<>();
     private ArrayList<OperatorInterface> operators = new ArrayList<>();
+
+    public void setProperties(ArrayList<String> properties) {
+        this.properties = properties;
+    }
 
     public void addRule(RuleInterface rule) {
         rules.add(rule);
@@ -21,36 +26,41 @@ public class RulesGroup implements RulesGroupInterface {
 
     public boolean execute() throws RulesGroupException {
 
-        if (rules.size() > 0 && rules.size() == (operators.size() + 1)) {
+        if (properties != null && properties.size() > 0) {
 
-            if (rules.size() > 1) {
+            if (rules.size() > 0 && rules.size() == (operators.size() + 1)) {
 
-                ArrayList<Boolean> rulesResults = new ArrayList<>();
+                if (rules.size() > 1) {
 
-                Iterator<RuleInterface> rulesIterator = this.rules.iterator();
-                while (rulesIterator.hasNext()) {
-                    rulesResults.add(rulesIterator.next().execute());
-                }
+                    ArrayList<Boolean> rulesResults = new ArrayList<>();
 
-                boolean result = false;
+                    Iterator<RuleInterface> rulesIterator = this.rules.iterator();
+                    while (rulesIterator.hasNext()) {
+                        rulesResults.add(rulesIterator.next().execute(properties));
+                    }
 
-                for (int operatorIndex = 0; operatorIndex < operators.size(); operatorIndex ++) {
+                    boolean result = false;
 
-                    if (operatorIndex == 0)
-                        result = operators.get(operatorIndex).apply(rulesResults.get(operatorIndex),
-                                rulesResults.get(operatorIndex+1));
-                    else
-                        result = operators.get(operatorIndex).apply(result, rulesResults.get(operatorIndex+1));
+                    for (int operatorIndex = 0; operatorIndex < operators.size(); operatorIndex ++) {
 
-                }
+                        if (operatorIndex == 0)
+                            result = operators.get(operatorIndex).apply(rulesResults.get(operatorIndex),
+                                    rulesResults.get(operatorIndex+1));
+                        else
+                            result = operators.get(operatorIndex).apply(result, rulesResults.get(operatorIndex+1));
 
-                return result;
+                    }
+
+                    return result;
+
+                } else
+                    return rules.get(0).execute(properties);
 
             } else
-                return rules.get(0).execute();
+                throw new RulesGroupException("Invalid rules");
 
         } else
-            throw new RulesGroupException("Invalid rules");
+            throw new RulesGroupException("Empty properties");
 
     }
 

@@ -9,23 +9,23 @@ import java.util.Arrays;
 
 public class NotEqualsTest {
 
-    ArrayList<String> values;
+    ArrayList<String> properties;
 
     @Before
     public void init() {
-        values = new ArrayList<>(Arrays.asList("value1", "value2", "value3"));
+        properties = new ArrayList<>(Arrays.asList("value1", "value2", "value3"));
     }
 
     @Test
     public void notContainsTest() {
-        NotEquals rule = new NotEquals(values, "value4");
-        Assert.assertTrue(rule.execute());
+        NotEquals rule = new NotEquals("value4");
+        Assert.assertTrue(rule.execute(properties));
     }
 
     @Test
     public void containsTest() {
-        NotEquals rule = new NotEquals(values, "value2");
-        Assert.assertFalse(rule.execute());
+        NotEquals rule = new NotEquals("value2");
+        Assert.assertFalse(rule.execute(properties));
     }
 
 }
