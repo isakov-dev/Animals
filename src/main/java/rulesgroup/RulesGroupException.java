@@ -1,4 +1,4 @@
-package rules.group;
+package rulesgroup;
 
 public class RulesGroupException extends Exception {
 

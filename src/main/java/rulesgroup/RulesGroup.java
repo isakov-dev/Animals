@@ -1,4 +1,4 @@
-package rules.group;
+package rulesgroup;
 
 import operators.operatorinterface.OperatorInterface;
 import rules.ruleinterface.RuleInterface;
@@ -6,7 +6,7 @@ import rules.ruleinterface.RuleInterface;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class RulesGroup {
+public class RulesGroup implements RulesGroupInterface {
 
     private ArrayList<RuleInterface> rules = new ArrayList<>();
     private ArrayList<OperatorInterface> operators = new ArrayList<>();

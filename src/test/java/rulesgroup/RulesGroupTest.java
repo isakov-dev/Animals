@@ -1,4 +1,4 @@
-package rules.group;
+package rulesgroup;
 
 import operators.operatorinterface.OperatorInterface;
 import org.junit.Assert;
