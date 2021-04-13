@@ -1,4 +1,4 @@
-package main.counter;
+package counter;
 
 import common.uobject.UObject;
 import org.junit.Assert;
