@@ -7,12 +7,10 @@ import java.util.ArrayList;
 
 public interface RulesGroupInterface {
 
-    void setProperties(ArrayList<String> properties);
-
     void addRule(RuleInterface rule);
 
     void addOperator(OperatorInterface operator);
 
-    boolean execute() throws RulesGroupException;
+    boolean execute(ArrayList<String> properties) throws RulesGroupException;
 
 }

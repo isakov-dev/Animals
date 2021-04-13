@@ -8,13 +8,8 @@ import java.util.Iterator;
 
 public class RulesGroup implements RulesGroupInterface {
 
-    private ArrayList<String> properties;
     private ArrayList<RuleInterface> rules = new ArrayList<>();
     private ArrayList<OperatorInterface> operators = new ArrayList<>();
-
-    public void setProperties(ArrayList<String> properties) {
-        this.properties = properties;
-    }
 
     public void addRule(RuleInterface rule) {
         rules.add(rule);
@@ -24,9 +19,9 @@ public class RulesGroup implements RulesGroupInterface {
         operators.add(operator);
     }
 
-    public boolean execute() throws RulesGroupException {
+    public boolean execute(ArrayList<String> properties) throws RulesGroupException {
 
-        if (properties != null && properties.size() > 0) {
+        if (properties.size() > 0) {
 
             if (rules.size() > 0 && rules.size() == (operators.size() + 1)) {
 

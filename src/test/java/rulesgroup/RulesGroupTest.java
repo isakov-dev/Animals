@@ -49,9 +49,10 @@ public class RulesGroupTest {
     public void emptyPropertiesTest() throws RulesGroupException {
 
         RulesGroup rulesGroup = new RulesGroup();
+        ArrayList<String> emptyProps = new ArrayList<>();
 
         try {
-            rulesGroup.execute();
+            rulesGroup.execute(emptyProps);
         } catch (RulesGroupException exception) {
             Assert.assertEquals("Empty properties", exception.getMessage());
             throw exception;
@@ -63,10 +64,9 @@ public class RulesGroupTest {
     public void noRulesTest() throws RulesGroupException {
 
         RulesGroup rulesGroup = new RulesGroup();
-        rulesGroup.setProperties(props);
 
         try {
-            rulesGroup.execute();
+            rulesGroup.execute(props);
         } catch (RulesGroupException exception) {
             Assert.assertEquals("Invalid rules", exception.getMessage());
             throw exception;
@@ -78,10 +78,9 @@ public class RulesGroupTest {
     public void oneRuleTest() throws RulesGroupException {
 
         RulesGroup rulesGroup = new RulesGroup();
-        rulesGroup.setProperties(props);
         rulesGroup.addRule(rule1);
 
-        boolean result = rulesGroup.execute();
+        boolean result = rulesGroup.execute(props);
 
         Assert.assertTrue(result);
 
@@ -92,15 +91,13 @@ public class RulesGroupTest {
 
         RulesGroup rulesGroup = new RulesGroup();
 
-        rulesGroup.setProperties(props);
-
         rulesGroup.addRule(rule1);
 
         rulesGroup.addOperator(operatorAnd);
         rulesGroup.addOperator(operatorAnd);
 
         try {
-            rulesGroup.execute();
+            rulesGroup.execute(props);
         } catch (RulesGroupException exception) {
             Assert.assertEquals("Invalid rules", exception.getMessage());
             throw exception;
@@ -113,8 +110,6 @@ public class RulesGroupTest {
 
         RulesGroup rulesGroup = new RulesGroup();
 
-        rulesGroup.setProperties(props);
-
         rulesGroup.addRule(rule1);
         rulesGroup.addRule(rule2);
         rulesGroup.addRule(rule3);
@@ -122,7 +117,7 @@ public class RulesGroupTest {
         rulesGroup.addOperator(operatorOr);
         rulesGroup.addOperator(operatorOr);
 
-        boolean result = rulesGroup.execute();
+        boolean result = rulesGroup.execute(props);
 
         Assert.assertTrue(result);
 
@@ -133,8 +128,6 @@ public class RulesGroupTest {
 
         RulesGroup rulesGroup = new RulesGroup();
 
-        rulesGroup.setProperties(props);
-
         rulesGroup.addRule(rule1);
         rulesGroup.addRule(rule2);
         rulesGroup.addRule(rule3);
@@ -142,7 +135,7 @@ public class RulesGroupTest {
         rulesGroup.addOperator(operatorAnd);
         rulesGroup.addOperator(operatorAnd);
 
-        boolean result = rulesGroup.execute();
+        boolean result = rulesGroup.execute(props);
 
         Assert.assertFalse(result);
 
@@ -153,8 +146,6 @@ public class RulesGroupTest {
 
         RulesGroup rulesGroup = new RulesGroup();
 
-        rulesGroup.setProperties(props);
-
         rulesGroup.addRule(rule1);
         rulesGroup.addRule(rule2);
         rulesGroup.addRule(rule3);
@@ -162,7 +153,7 @@ public class RulesGroupTest {
         rulesGroup.addOperator(operatorAnd);
         rulesGroup.addOperator(operatorOr);
 
-        boolean result = rulesGroup.execute();
+        boolean result = rulesGroup.execute(props);
 
         Assert.assertTrue(result);
 
@@ -173,8 +164,6 @@ public class RulesGroupTest {
 
         RulesGroup rulesGroup = new RulesGroup();
 
-        rulesGroup.setProperties(props);
-
         rulesGroup.addRule(rule1);
         rulesGroup.addRule(rule2);
         rulesGroup.addRule(rule3);
@@ -182,7 +171,7 @@ public class RulesGroupTest {
         rulesGroup.addOperator(operatorOr);
         rulesGroup.addOperator(operatorAnd);
 
-        boolean result = rulesGroup.execute();
+        boolean result = rulesGroup.execute(props);
 
         Assert.assertFalse(result);
 
@@ -193,8 +182,6 @@ public class RulesGroupTest {
 
         RulesGroup rulesGroup = new RulesGroup();
 
-        rulesGroup.setProperties(props);
-
         rulesGroup.addRule(rule1);
         rulesGroup.addRule(rule2);
         rulesGroup.addRule(rule3);
@@ -202,7 +189,7 @@ public class RulesGroupTest {
         rulesGroup.addOperator(operatorOr);
 
         try {
-            rulesGroup.execute();
+            rulesGroup.execute(props);
         } catch (RulesGroupException exception) {
             Assert.assertEquals("Invalid rules", exception.getMessage());
             throw exception;
@@ -215,8 +202,6 @@ public class RulesGroupTest {
 
         RulesGroup rulesGroup = new RulesGroup();
 
-        rulesGroup.setProperties(props);
-
         rulesGroup.addRule(rule1);
         rulesGroup.addRule(rule2);
 
@@ -224,7 +209,7 @@ public class RulesGroupTest {
         rulesGroup.addOperator(operatorOr);
 
         try {
-            rulesGroup.execute();
+            rulesGroup.execute(props);
         } catch (RulesGroupException exception) {
             Assert.assertEquals("Invalid rules", exception.getMessage());
             throw exception;
