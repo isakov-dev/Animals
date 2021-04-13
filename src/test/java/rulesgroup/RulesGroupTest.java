@@ -18,7 +18,7 @@ public class RulesGroupTest {
     @Before
     public void init() {
 
-        props = new ArrayList<String>();
+        props = new ArrayList<>();
         props.add("prop1");
         props.add("prop2");
 
