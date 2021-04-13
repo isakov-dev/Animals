@@ -8,15 +8,16 @@ import java.util.Iterator;
 
 public class RulesGroup implements RulesGroupInterface {
 
-    private ArrayList<RuleInterface> rules = new ArrayList<>();
+    private ArrayList<RuleInterface> rules;
     private ArrayList<OperatorInterface> operators = new ArrayList<>();
 
-    public void addRule(RuleInterface rule) {
-        rules.add(rule);
+    public RulesGroup(ArrayList<RuleInterface> rules) {
+        this.rules = rules;
     }
 
-    public void addOperator(OperatorInterface operator) {
-        operators.add(operator);
+    public RulesGroup(ArrayList<RuleInterface> rules, ArrayList<OperatorInterface> operators) {
+        this.rules = rules;
+        this.operators = operators;
     }
 
     public boolean execute(ArrayList<String> properties) throws RulesGroupException {

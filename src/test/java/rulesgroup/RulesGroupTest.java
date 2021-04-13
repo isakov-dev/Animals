@@ -14,6 +14,8 @@ public class RulesGroupTest {
     ArrayList<String> props;
     RuleInterface rule1, rule2, rule3;
     OperatorInterface operatorOr, operatorAnd;
+    ArrayList<RuleInterface> rules;
+    ArrayList<OperatorInterface> operators;
 
     @Before
     public void init() {
@@ -48,7 +50,9 @@ public class RulesGroupTest {
     @Test (expected = RulesGroupException.class)
     public void emptyPropertiesTest() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+
+        RulesGroup rulesGroup = new RulesGroup(rules);
         ArrayList<String> emptyProps = new ArrayList<>();
 
         try {
@@ -63,7 +67,9 @@ public class RulesGroupTest {
     @Test (expected = RulesGroupException.class)
     public void noRulesTest() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+
+        RulesGroup rulesGroup = new RulesGroup(rules);
 
         try {
             rulesGroup.execute(props);
@@ -77,8 +83,10 @@ public class RulesGroupTest {
     @Test
     public void oneRuleTest() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
-        rulesGroup.addRule(rule1);
+        rules = new ArrayList<>();
+        rules.add(rule1);
+
+        RulesGroup rulesGroup = new RulesGroup(rules);
 
         boolean result = rulesGroup.execute(props);
 
@@ -89,12 +97,14 @@ public class RulesGroupTest {
     @Test (expected = RulesGroupException.class)
     public void oneRuleWithOperatorsTest() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+        rules.add(rule1);
 
-        rulesGroup.addRule(rule1);
+        operators = new ArrayList<>();
+        operators.add(operatorAnd);
+        operators.add(operatorAnd);
 
-        rulesGroup.addOperator(operatorAnd);
-        rulesGroup.addOperator(operatorAnd);
+        RulesGroup rulesGroup = new RulesGroup(rules, operators);
 
         try {
             rulesGroup.execute(props);
@@ -108,15 +118,16 @@ public class RulesGroupTest {
     @Test
     public void severalRulesOrTest() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+        rules.add(rule1);
+        rules.add(rule2);
+        rules.add(rule3);
 
-        rulesGroup.addRule(rule1);
-        rulesGroup.addRule(rule2);
-        rulesGroup.addRule(rule3);
+        operators = new ArrayList<>();
+        operators.add(operatorOr);
+        operators.add(operatorOr);
 
-        rulesGroup.addOperator(operatorOr);
-        rulesGroup.addOperator(operatorOr);
-
+        RulesGroup rulesGroup = new RulesGroup(rules, operators);
         boolean result = rulesGroup.execute(props);
 
         Assert.assertTrue(result);
@@ -126,15 +137,16 @@ public class RulesGroupTest {
     @Test
     public void severalRulesAndTest() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+        rules.add(rule1);
+        rules.add(rule2);
+        rules.add(rule3);
 
-        rulesGroup.addRule(rule1);
-        rulesGroup.addRule(rule2);
-        rulesGroup.addRule(rule3);
+        operators = new ArrayList<>();
+        operators.add(operatorAnd);
+        operators.add(operatorAnd);
 
-        rulesGroup.addOperator(operatorAnd);
-        rulesGroup.addOperator(operatorAnd);
-
+        RulesGroup rulesGroup = new RulesGroup(rules, operators);
         boolean result = rulesGroup.execute(props);
 
         Assert.assertFalse(result);
@@ -144,15 +156,16 @@ public class RulesGroupTest {
     @Test
     public void severalRulesAndOrTest() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+        rules.add(rule1);
+        rules.add(rule2);
+        rules.add(rule3);
 
-        rulesGroup.addRule(rule1);
-        rulesGroup.addRule(rule2);
-        rulesGroup.addRule(rule3);
+        operators = new ArrayList<>();
+        operators.add(operatorAnd);
+        operators.add(operatorOr);
 
-        rulesGroup.addOperator(operatorAnd);
-        rulesGroup.addOperator(operatorOr);
-
+        RulesGroup rulesGroup = new RulesGroup(rules, operators);
         boolean result = rulesGroup.execute(props);
 
         Assert.assertTrue(result);
@@ -162,15 +175,16 @@ public class RulesGroupTest {
     @Test
     public void severalRulesOrAndTest() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+        rules.add(rule1);
+        rules.add(rule2);
+        rules.add(rule3);
 
-        rulesGroup.addRule(rule1);
-        rulesGroup.addRule(rule2);
-        rulesGroup.addRule(rule3);
+        operators = new ArrayList<>();
+        operators.add(operatorOr);
+        operators.add(operatorAnd);
 
-        rulesGroup.addOperator(operatorOr);
-        rulesGroup.addOperator(operatorAnd);
-
+        RulesGroup rulesGroup = new RulesGroup(rules, operators);
         boolean result = rulesGroup.execute(props);
 
         Assert.assertFalse(result);
@@ -180,13 +194,15 @@ public class RulesGroupTest {
     @Test (expected = RulesGroupException.class)
     public void severalRulesNotEnoughOperators() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+        rules.add(rule1);
+        rules.add(rule2);
+        rules.add(rule3);
 
-        rulesGroup.addRule(rule1);
-        rulesGroup.addRule(rule2);
-        rulesGroup.addRule(rule3);
+        operators = new ArrayList<>();
+        operators.add(operatorOr);
 
-        rulesGroup.addOperator(operatorOr);
+        RulesGroup rulesGroup = new RulesGroup(rules, operators);
 
         try {
             rulesGroup.execute(props);
@@ -200,13 +216,15 @@ public class RulesGroupTest {
     @Test (expected = RulesGroupException.class)
     public void severalRulesTooMuchOperators() throws RulesGroupException {
 
-        RulesGroup rulesGroup = new RulesGroup();
+        rules = new ArrayList<>();
+        rules.add(rule1);
+        rules.add(rule2);
 
-        rulesGroup.addRule(rule1);
-        rulesGroup.addRule(rule2);
+        operators = new ArrayList<>();
+        operators.add(operatorOr);
+        operators.add(operatorOr);
 
-        rulesGroup.addOperator(operatorOr);
-        rulesGroup.addOperator(operatorOr);
+        RulesGroup rulesGroup = new RulesGroup(rules, operators);
 
         try {
             rulesGroup.execute(props);
