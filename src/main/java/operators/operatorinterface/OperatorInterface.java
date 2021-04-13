@@ -2,6 +2,6 @@ package operators.operatorinterface;
 
 public interface OperatorInterface {
 
-    public boolean apply(boolean bool1, boolean bool2);
+    boolean apply(boolean bool1, boolean bool2);
 
 }
